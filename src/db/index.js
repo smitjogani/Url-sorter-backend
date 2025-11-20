@@ -7,9 +7,10 @@ const { Pool } = pg;
 
 const connectionString = process.env.DATABASE_URL;
 
-if (!connectionString) {
-    console.error('\u274c DATABASE_URL is not set in environment');
-    throw new Error('Missing DATABASE_URL');
+// Defensive check: give a clear, non-secret error when DATABASE_URL is missing or empty.
+if (!connectionString || typeof connectionString !== 'string' || connectionString.trim() === '') {
+    console.error('\u274c DATABASE_URL is not set or is empty. On Render, add it in Service → Environment by the name DATABASE_URL (do NOT include surrounding quotes).');
+    throw new Error('Missing_DATABASE_URL');
 }
 
 // Neon requires SSL; some environments need rejectUnauthorized: false
