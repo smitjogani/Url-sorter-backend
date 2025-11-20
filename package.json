@@ -1,0 +1,34 @@
+{
+    "name": "tinylink-backend",
+    "version": "1.0.0",
+    "description": "TinyLink Backend API - Node.js + Express + Postgres (Neon)",
+    "main": "server.js",
+    "type": "module",
+    "scripts": {
+        "start": "node server.js",
+        "dev": "node --watch server.js"
+    },
+    "keywords": [
+        "url-shortener",
+        "api",
+        "express",
+        "postgres",
+        "neon"
+    ],
+    "author": "",
+    "license": "MIT",
+    "dependencies": {
+        "@prisma/client": "^6.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^16.6.1",
+        "express": "^4.18.2",
+        "express-rate-limit": "^7.1.5",
+        "helmet": "^7.1.0",
+        "pg": "^8.16.3",
+        "prisma": "^6.19.0",
+        "validator": "^13.11.0"
+    },
+    "engines": {
+        "node": ">=18.0.0"
+    }
+}
