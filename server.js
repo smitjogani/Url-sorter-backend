@@ -18,9 +18,18 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 // Security middleware
 app.use(helmet());
 
-// CORS configuration - allow frontend
+// CORS configuration - allow frontend and localhost during development
+const allowedOrigins = [FRONTEND_URL, 'http://localhost:3000', 'http://127.0.0.1:3000'];
 app.use(cors({
-    origin: FRONTEND_URL,
+    origin: (origin, callback) => {
+        // Allow requests with no origin (curl, server-to-server)
+        if (!origin) return callback(null, true);
+        if (allowedOrigins.includes(origin)) {
+            return callback(null, true);
+        }
+        // Otherwise block the request and provide a helpful message
+        return callback(new Error(`CORS policy: origin ${origin} not allowed`));
+    },
     credentials: true,
 }));
 
